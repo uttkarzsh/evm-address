@@ -23,15 +23,15 @@ contract TestAddressEVM is Test{
     function testDeriveAddress() public {
         int256 rand = vm.randomInt();
         string memory user = vm.toString(rand);
-        (address userAddress, uint256 userPvtKey) = makeAddrAndKey(user);
+        (address userAddress, uint256 userPvtKey) = makeAddrAndKey(user);       // generating random address and pvt key
         console.log("Expected address: ");
         console.logAddress(userAddress);
 
-        address calculatedAddress = addressGenerator.deriveAddress(userPvtKey);
+        address calculatedAddress = addressGenerator.deriveAddress(userPvtKey);     // generating the address using the pvt key
         console.log("Calculated Address: ");
         console.logAddress(calculatedAddress);
 
-        vm.assertEq(userAddress, calculatedAddress);
+        vm.assertEq(userAddress, calculatedAddress);        // checking if the addresses match
 
     }
 }

@@ -22,10 +22,10 @@ contract AddressEVM {
     }
 
     function deriveAddress(uint256 pvtKey) public pure returns(address) {
-        (uint256 qx, uint256 qy) = publicKey(pvtKey);
-        bytes32 hashedPubKey = keccak256(abi.encodePacked(qx, qy));
-        bytes20 trimmedHashedPubKey = bytes20(uint160(uint256(hashedPubKey)));
-        address derivedAddress = address(trimmedHashedPubKey);
+        (uint256 qx, uint256 qy) = publicKey(pvtKey);       // generating the public key from the private key
+        bytes32 hashedPubKey = keccak256(abi.encodePacked(qx, qy));     // hashing the public key
+        bytes20 trimmedHashedPubKey = bytes20(uint160(uint256(hashedPubKey)));      // the evm address is the last 20 bytes of the hashed public key
+        address derivedAddress = address(trimmedHashedPubKey);      // typecasting bytes20 into address
         return derivedAddress;
     }
 }
