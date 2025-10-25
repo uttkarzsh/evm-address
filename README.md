@@ -1,66 +1,32 @@
-## Foundry
+# Ethereum Address Derivation (Solidity + Foundry)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A simple learning project that demonstrates how an Ethereum address is derived from a private key directly in Solidity, using the **secp256k1** curve.
 
-Foundry consists of:
+It performs:
+1. Public key generation from a private key (`k * G` on secp256k1)
+2. Hashing the public key with `keccak256`
+3. Taking the last 20 bytes to form the Ethereum address
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+### ⚠️ Warning
+This project is **for educational purposes only**.  
+Do **NOT** deploy it or use any **real private keys**.  
+Doing so can permanently expose your wallet and funds.
 
-https://book.getfoundry.sh/
+---
 
-## Usage
+### 🧪 Run Locally
 
-### Build
+```bash
+# Clone the repository
+git clone https://github.com/uttkarzsh/evm-address
+cd evm-address
 
-```shell
-$ forge build
-```
+# Install Foundry (if not installed)
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+# Run the tests
+forge install
+forge test -vv
